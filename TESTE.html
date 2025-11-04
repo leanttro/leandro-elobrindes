@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leandro Andrade | Proposta Elo Brindes</title>
+    
+    <!-- Importação das Fontes 'Chiques' -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Variáveis de Cor (Paleta Vinho & Dourado) --- */
+        :root {
+            /* Cores Vinho */
+            --vinho-escuro: #4d0307; /* ATUALIZADO para a sua cor */
+            --vinho-principal: #8C0032; /* Vinho principal da marca */
+
+            /* Cores Dourado */
+            --dourado-claro: #D4AF37;
+            --dourado-escuro: #B8860B;
+
+            /* Cores Neutras 'Chiques' */
+            --texto-claro: #F4F4F4;
+            --texto-escuro: #333333;
+            --fundo-claro: #FCFCFA; /* Um branco 'creme', mais premium */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--texto-escuro);
+            background: var(--fundo-claro);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* --- NOVO: Cabeçalho --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            transition: all 0.4s ease-out;
+            background: transparent;
+        }
+
+        header.scrolled {
+            background: var(--vinho-escuro);
+            padding: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--texto-claro);
+            text-decoration: none;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        header nav a {
+            color: var(--texto-claro);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        header nav a:hover {
+            color: var(--dourado-claro);
+            border-bottom-color: var(--dourado-claro);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 28px;
+            height: 22px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--texto-claro);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        /* --- FIM: Cabeçalho --- */
+
+
+        /* --- Seção Hero (Vinho & Dourado) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            /* REMOVIDO o background: linear-gradient */
+            color: var(--texto-claro);
+            position: relative;
+            /* REMOVIDO o padding: 4rem 0; */
+            overflow: hidden; /* Para conter os slides */
+        }
+
+        /* --- NOVAS CLASSES PARA O SLIDESHOW --- */
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            animation: kenburns 20s infinite; /* Efeito de zoom sutil */
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        /* Overlay de Vinho Transparente */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Cor que você pediu (#4d0307) com 85% de opacidade (era 0.6) */
+            background-color: rgba(77, 3, 7, 0.85); 
+            z-index: 1;
+        }
+
+        /* Animação Ken Burns (zoom sutil) */
+        @keyframes kenburns {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        /* --- FIM DAS NOVAS CLASSES --- */
+
+
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Texto fica acima do overlay */
+            max-width: 750px;
+        }
+
+        .hero-tag {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            /* Usando Dourado para a tag */
+            color: var(--dourado-claro);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem; /* Grande e de impacto */
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #FFFFFF;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            opacity: 0.90;
+            margin-bottom: 2.5rem;
+        }
+
+        /* O Botão Dourado 'Chique' */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 40px;
+            /* O Gradiente Dourado */
+            background: linear-gradient(to bottom, #FFD700, #DAA520);
+            /* Texto do botão na cor Vinho */
+            color: var(--vinho-escuro);
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* --- INÍCIO DO NOVO BLOCO CSS SOBRE MIM (CARROSSEL) --- */
+        #sobre-mim {
+            padding-top: 50px; /* AJUSTADO DE 100px */
+            padding-bottom: 12px; /* AJUSTADO DE 25px */
+        }
+        
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px; /* Largura máxima do carrossel */
+            margin: 0 auto;
+            border-radius: 16px;
+        }
+        
+        .carousel-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            padding: 50px;
+            background: #ffffff; /* Fundo branco para a "caixa" */
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            text-align: left;
+            box-sizing: border-box; /* Garante que o padding não quebre o layout */
+        }
+        
+        .carousel-slide h3 {
+            font-size: 2.2rem;
+            color: var(--vinho-escuro);
+            margin-bottom: 1rem;
+        }
+        
+        .carousel-slide p {
+            font-size: 1.15rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-section-highlight {
+            font-weight: 700;
+            color: var(--vinho-principal);
+        }
+
+        .carousel-controls {
+            /* Posição absoluta removida */
+            width: 100%;
+            display: flex;
+            justify-content: center; /* Centraliza os botões */
+            gap: 15px; /* Espaço entre os botões */
+            margin: 20px auto 0 auto; /* Margem acima dos botões */
+            pointer-events: none;
+        }
+        
+        .carousel-btn {
+            pointer-events: all; /* Garante que os botões sejam clicáveis */
+            background: var(--vinho-escuro);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            /* Margens laterais removidas */
+        }
+
+        .carousel-btn:hover {
+            background: var(--vinho-principal);
+            transform: scale(1.1);
+        }
+        /* --- FIM DO NOVO BLOCO CSS SOBRE MIM (CARROSSEL) --- */
+        
+        /* --- Estilo das Seções (Fundo Claro) --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px; /* AJUSTADO DE 80px */
+        }
+
+        .section-tag {
+            font-size: 0.9rem;
+            font-weight: 700;
+            /* Tag na cor Vinho */
+            color: var(--vinho-principal);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            /* Título na cor Vinho Escuro */
+            color: var(--vinho-escuro);
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* --- O Layout de Cards "Chique" --- */
+        .project-showcase {
+            background: var(--fundo-claro);
+            padding-top: 50px; /* AJUSTADO DE 100px */
+        }
+
+        .showcase-grid {
+            display: grid;
+            gap: 60px;
+        }
+
+        .showcase-item {
+            background: #ffffff; /* Card branco puro para flutuar */
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .showcase-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+        }
+
+        .showcase-content {
+            padding: 50px;
+        }
+        
+        /* A "Etiqueta" no estilo Vinho/Dourado */
+        .showcase-label {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #F0E6E8; /* Um vinho bem clarinho */
+            color: var(--vinho-principal);
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .showcase-item h3 {
+            font-size: 2rem;
+            color: var(--vinho-escuro);
+            margin-bottom: 1rem;
+        }
+
+        .showcase-item p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Placeholder para suas imagens/prints */
+        .showcase-image {
+            width: 100%;
+            height: auto; /* Altura automática para imagens reais */
+            min-height: 300px; /* Altura mínima */
+            display: block; /* Para a imagem se comportar bem */
+            background: #f4f4f4; /* Cor de fundo enquanto a imagem não carrega */
+        }
+
+        .showcase-image-placeholder {
+            width: 100%;
+            min-height: 400px;
+            background: var(--vinho-escuro);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 14px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            border: 2px solid transparent;
+        }
+
+        /* Botão Primário: Dourado */
+        .btn-primary {
+            background: linear-gradient(to bottom, #D4AF37, #B8860B);
+            color: var(--vinho-escuro);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to bottom, #FFD700, #DAA520);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Botão Secundário: Contorno Vinho */
+        .btn-secondary {
+            background: transparent;
+            color: var(--vinho-principal);
+            border-color: var(--vinho-principal);
+        }
+
+        .btn-secondary:hover {
+            background: var(--vinho-principal);
+            color: white;
+        }
+
+        /* Seção de Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--vinho-principal);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* --- INÍCIO: NOVOS ESTILOS CARROSSEL "OUTROS PROJETOS" --- */
+        #outros-projetos {
+            padding-bottom: 50px; /* Menor espaçamento inferior */
+        }
+        
+        .outros-projetos-wrapper {
+            position: relative;
+            padding: 0 50px; /* Espaço para os botões de navegação */
+        }
+        
+        .outros-projetos-carousel {
+            display: flex;
+            gap: 1.5rem; /* 24px */
+            overflow-x: hidden; /* Controlado pelo JS */
+            scroll-behavior: smooth;
+            padding: 1rem 0; /* Espaço para sombra */
+        }
+        
+        .outro-projeto-card {
+            flex: 0 0 300px; /* Largura fixa do card */
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .outro-projeto-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.12);
+        }
+        
+        .outro-projeto-imagem {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background-color: var(--vinho-escuro); /* Cor de fundo */
+        }
+        
+        .outro-projeto-conteudo {
+            padding: 25px;
+        }
+        
+        .outro-projeto-conteudo h3 {
+            font-size: 1.5rem;
+            color: var(--vinho-escuro);
+            margin-bottom: 1rem;
+            /* Garante que o título não quebre em muitas linhas */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .outro-projeto-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            min-height: 50px; /* Altura mínima para alinhar botões */
+        }
+        
+        .outro-projeto-skills span {
+            background: #F0E6E8; /* Vinho clarinho */
+            color: var(--vinho-principal);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+        }
+        
+        .outro-projeto-links .btn-primary {
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--vinho-escuro);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+        
+        .nav-btn:hover {
+            background: var(--vinho-principal);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        #prev-projeto-btn {
+            left: -10px;
+        }
+        
+        #next-projeto-btn {
+            right: -10px;
+        }
+        /* --- FIM: NOVOS ESTILOS CARROSSEL "OUTROS PROJETOS" --- */
+
+
+        /* Seção Contato */
+        .contact {
+            background: linear-gradient(135deg, var(--vinho-principal) 0%, var(--vinho-escuro) 100%);
+            color: var(--texto-claro);
+            text-align: center;
+            padding-top: 50px; /* AJUSTADO DE 100px */
+            padding-bottom: 50px; /* AJUSTADO DE 100px */
+        }
+
+        .contact h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 2.8rem;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 16px 35px;
+            background: linear-gradient(to bottom, #FFD700, #DAA520);
+            color: var(--vinho-escuro);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--vinho-escuro);
+            color: var(--texto-claro);
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+        }
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            /* --- NOVO: Responsividade Cabeçalho --- */
+            header nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px; /* Altura do cabeçalho */
+                left: 0;
+                width: 100%;
+                background-color: var(--vinho-escuro);
+                text-align: center;
+                gap: 0;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            }
+            header nav ul.active {
+                display: flex;
+            }
+            header nav li {
+                width: 100%;
+            }
+            header nav a {
+                display: block;
+                padding: 1.25rem 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            header nav a:hover {
+                background: var(--vinho-principal);
+                border-bottom-color: var(--vinho-principal);
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            /* --- FIM: Responsividade Cabeçalho --- */
+            
+            .hero {
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 60px;
+                text-align: center;
+            }
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            /* --- Responsividade Carrossel Sobre Mim --- */
+            @media (max-width: 900px) {
+                .carousel-btn {
+                    width: 40px;
+                    height: 40px;
+                    font-size: 1.2rem;
+                }
+                .carousel-slide {
+                    padding: 30px;
+                }
+            }
+            /* --- FIM Responsividade Carrossel Sobre Mim --- */
+            
+            .showcase-content {
+                padding: 30px;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            .btn-primary, .btn-secondary {
+                text-align: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            /* --- NOVO: Responsividade "Outros Projetos" --- */
+            .outros-projetos-wrapper {
+                padding: 0; /* Remove padding lateral no mobile */
+            }
+            .outros-projetos-carousel {
+                overflow-x: auto; /* Habilita scroll horizontal no mobile */
+                padding: 1rem 20px; /* Adiciona padding para ver os cards */
+                /* Remove setas de navegação no mobile */
+            }
+            .nav-btn {
+                display: none;
+            }
+            .outro-projeto-card {
+                flex: 0 0 260px; /* Cards menores no mobile */
+            }
+            /* --- FIM: Responsividade "Outros Projetos" --- */
+        }
+    </style>
+</head>
+<body id="inicio"> <!-- ID adicionado ao body -->
+
+    <!-- NOVO: Cabeçalho -->
+    <header id="main-header">
+        <div class="container header-container">
+            <a href="#inicio" class="logo">Leandro Andrade</a>
+            <nav>
+                <ul id="nav-menu">
+                    <!-- Links atualizados para seções existentes -->
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#sobre-mim">Sobre Mim</a></li>
+                    <li><a href="#projeto">O Case</a></li>
+                    <li><a href="#outros-projetos">Projetos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    <!-- FIM: Cabeçalho -->
+
+    <!-- Hero Section -->
+    <section class="hero">
+        
+        <!-- INÍCIO DO SLIDESHOW (Background) -->
+        <div class="hero-slideshow" id="hero-slideshow">
+            <!-- 
+                Coloque suas imagens aqui. 
+                Elas devem estar na mesma pasta do index.html 
+            -->
+            <div class="hero-slide active" style="background-image: url('hero-dashboard.png');"></div>
+            <div class="hero-slide" style="background-image: url('hero-comparison.png');"></div>
+            <div class="hero-slide" style="background-image: url('hero-code.png');"></div>
+        </div>
+        <!-- FIM DO SLIDESHOW -->
+
+        <!-- OVERLAY DE VINHO (Por cima dos slides) -->
+        <div class="hero-overlay"></div>
+
+        <div class="container"> <!-- Container para o conteúdo de texto -->
+            <div class="hero-content">
+                <!-- SUBSTITUA PELO CAMINHO PARA A LOGO DA ELO BRINDES (com fundo transparente, de preferência) -->
+                <img src="logo.png" alt="Logo Elo Brindes" style="width: 150px; margin-bottom: 2rem; filter: brightness(0) invert(1);">
+                
+                <div class="hero-tag">Proposta para Vaga Dev Full Stack</div>
+                <h1>Olá, Elo Brindes.<br>Meu nome é Leandro.</h1>
+                <p class="hero-subtitle">
+                    Vi sua vaga e, ao invés de apenas enviar um currículo, decidi mostrar na prática
+                    como eu conecto Frontend, Inteligência Artificial e Business Intelligence
+                    para gerar valor real.
+                </p>
+                <a href="#projeto" class="cta-button">Veja o que eu construí para vocês</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- INÍCIO DA NOVA SEÇÃO SOBRE MIM -->
+    <section id="sobre-mim">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Minha História</div>
+                <h2 class="section-title">Por que eu sou o encaixe perfeito?</h2>
+                <p class="section-description">
+                    Uma combinação de experiência no mercado de brindes e aceleração técnica em IA/Dados.
+                </p>
+            </div>
+
+            <!-- INÍCIO DA NOVA ESTRUTURA DO CARROSSEL -->
+            <div class="carousel-container" id="about-carousel">
+                <div class="carousel-slider">
+                    <!-- Slide 1: Experiência -->
+                    <div class="carousel-slide">
+                        <h3>10 Anos de Experiência em Gráficas e Brindes</h3>
+                        <p>
+                            Minha trajetória é única. Possuo mais de 10 anos de experiência direta no <span class="about-section-highlight">setor de gráficas, brindes e produção</span>, tendo atuado em empresas de referência como <span class="about-section-highlight">Oceano Etiquetas e Brindes, Corum e Arte Rox</span>. Essa vivência me deu uma compreensão profunda da operação, dos desafios, dos fornecedores e do *timing* de mercado da Elo Brindes.
+                        </p>
+                    </div>
+                    
+                    <!-- Slide 2: Transição -->
+                    <div class="carousel-slide">
+                        <h3>Transição Acelerada para Tecnologia e IA</h3>
+                        <p>
+                            Atualmente, estou em uma acelerada transição de carreira de Marketing/Design para a área de <span class="about-section-highlight">Dados e Inteligência Artificial</span>. Isso me permite conectar o entendimento do negócio (que vocês já têm) com a aplicação técnica de soluções de ponta, como demonstrei no projeto Full Stack, IA e BI.
+                        </p>
+                    </div>
+                    
+                    <!-- Slide 3: Qualificação -->
+                    <div class="carousel-slide">
+                        <h3>Qualificação Técnica de Ponta (SENAI & Faculdade)</h3>
+                        <p>
+                            Para garantir essa transição, investi pesadamente em qualificação técnica: cursei <span class="about-section-highlight">mais de 7 treinamentos no SENAI só este ano</span> (incluindo Power BI, Python, IA Generativa e Banco de Dados) e estou atualmente cursando a faculdade de Inteligência Artificial. Eu trago o <span class="about-section-highlight">conhecimento técnico mais atualizado</span> e a paixão para aplicá-lo ao seu negócio.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- FIM DA NOVA ESTRUTURA DO CARROSSEL -->
+            
+            <!-- Controles do Carrossel (MOVIMOVOS PARA FORA DO CONTAINER) -->
+            <div class="carousel-controls">
+                <button class="carousel-btn prev-btn" id="about-prev">&larr;</button>
+                <button class="carousel-btn next-btn" id="about-next">&rarr;</button>
+            </div>
+
+        </div>
+    </section>
+    <!-- FIM DA NOVA SEÇÃO SOBRE MIM -->
+
+    <!-- Seção Principal do Projeto -->
+    <section id="projeto" class="project-showcase">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">O Case</div>
+                <h2 class="section-title">O Projeto-Pitch Elo Brindes</h2>
+                <p class="section-description">
+                    Uma solução ponta-a-ponta que demonstra o ciclo completo de valor:
+                    atrair, qualificar e analisar.
+                </sP>
+            </div>
+
+            <div class="showcase-grid">
+
+                <!-- 1. Frontend -->
+                <div class="showcase-item">
+                    <!-- 
+                        COLOQUE SEU PRINT DE COMPARAÇÃO "ANTES E DEPOIS" AQUI 
+                        Substituí o placeholder por uma tag <img> real.
+                    -->
+                    <img src="comparativo_mobile.png" alt="Comparativo do site mobile" class="showcase-image">
+                    
+                    <div class="showcase-content">
+                        <span class="showcase-label">Frontend Development</span>
+                        <h3>A Interface que Atrai</h3>
+                        <p>
+                            A vaga pedia um Dev Full Stack. Comecei pela vitrine: uma proposta de
+                            interface moderna, 100% responsiva e otimizada,
+                            focada em melhorar a experiência do usuário no mobile.
+                        </p>
+                        <div class="button-group">
+                            <!-- SUBSTITUA PELO LINK DO SEU GITHUB PAGES -->
+                            <a href="https://leanttro.github.io/elo-brindes/" class="btn-primary" target="_blank">Ver Site ao Vivo</a>
+                            <!-- SUBSTITUA PELO LINK DO SEU REPOSITÓRIO -->
+                            <a href="https://github.com/leanttro" class="btn-secondary" target="_blank">Código no GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Backend & IA -->
+                <div class="showcase-item">
+                    <!-- 
+                        COLOQUE SEU PRINT DO DATAFRAME DO COLAB AQUI 
+                        Substituí o placeholder por uma tag <img> real.
+                    -->
+                    <img src="dataframe_leads.png" alt="Dataframe com leads" class="showcase-image">
+
+                    <div class="showcase-content">
+                        <span class="showcase-label">IA & Cloud Backend</span>
+                        <h3>A Inteligência que Qualifica</h3>
+                        <p>
+                            A vaga mencionava IA e Cloud. Integrei o "EloBot" que qualifica leads
+                            automaticamente. Cada interação é salva em um banco de dados
+                            PostgreSQL na nuvem, criando uma base valiosa para o time de vendas.
+                        </p>
+                        <div class="button-group">
+                            <!-- COLOQUE O LINK PARA SEU PROJETO FEIRAS DE RUA (que tem o bot) -->
+                            <a href="https://chatbot-grafica-dmq7.onrender.com/" class="btn-primary" target="_blank">Testar Bot Similar</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 
+                    NOVO CARD (3) DE AUTOMAÇÃO (N8N)
+                    O card de BI vira o número 4 
+                -->
+                <div class="showcase-item">
+                    <!-- 
+                        COLOQUE SEU PRINT DO WORKFLOW DO N8N AQUI
+                        Nome do arquivo: automacao_n8n.png
+                    -->
+                    <img src="automacao_n8n.png" alt="Workflow de Automação n8n" class="showcase-image">
+
+                    <div class="showcase-content">
+                        <span class="showcase-label">Automação de Marketing</span>
+                        <h3>A Nutrição que Engaja</h3>
+                        <p>
+                            O trabalho não termina na captura. Criei um workflow de automação
+                            (com n8n) que "ouve" o banco de dados. Quando um lead é
+                            qualificado, ele dispara e-mails automáticos (como "5 ideias de brindes"),
+                            nutrindo o cliente e aquecendo-o para a venda.
+                        </p>
+                        <div class="button-group">
+                            <!-- BOTÃO REMOVIDO -->
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 3. Business Intelligence (AGORA É O 4º) -->
+                <div class="showcase-item">
+                    <!-- 
+                        COLOQUE SEU PRINT DO DASHBOARD DO POWER BI AQUI 
+                        Substituí o placeholder por uma tag <img> real.
+                    -->
+                    <img src="dashboard_powerbi.png" alt="Dashboard Power BI" class="showcase-image">
+
+                    <div class="showcase-content">
+                        <span class="showcase-label">Business Intelligence</span>
+                        <h3>Os Dados que Provam o Valor</h3>
+                        <p>
+                            A vaga pedia noções de Power BI. Conectei os dados do bot neste
+                            dashboard executivo que mostra o ROI em tempo real: taxa de conversão,
+                            perfil dos cargos que mais compram e o histórico de conversas.
+                        </p>
+                        <div class="button-group">
+                            <!-- ATUALIZADO o href -->
+                            <a href="EloBrindes.pbix" class="btn-primary" download>Baixar Dashboard (.pbix)</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">11%</div>
+                    <div class="stat-label">Taxa de Conversão</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Leads Qualificados</div>
+                </div>
+                <div class="stat-item">
+                    <!-- ATUALIZADO DE 3 PARA 4 -->
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Pilares Integrados<br>(Web, IA, Automação, BI)</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Funcional e Pronto</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INÍCIO: NOVA SEÇÃO "OUTROS PROJETOS" -->
+    <section id="outros-projetos">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-tag">Portfólio</div>
+                <h2 class="section-title">Outros Projetos Desenvolvidos</h2>
+                <p class="section-description">
+                    Uma seleção de outros projetos que demonstram minhas habilidades em Dados, IA e Desenvolvimento Web.
+                </p>
+            </div>
+
+            <div class="outros-projetos-wrapper">
+                <button class="nav-btn" id="prev-projeto-btn">&larr;</button>
+                <div class="outros-projetos-carousel" id="outros-projetos-carousel">
+                    <!-- Cards serão injetados aqui pelo JavaScript -->
+                </div>
+                <button class="nav-btn" id="next-projeto-btn">&rarr;</button>
+            </div>
+        </div>
+    </section>
+    <!-- FIM: NOVA SEÇÃO "OUTROS PROJETOS" -->
+
+
+    <!-- Seção Contato -->
+    <section class="contact" id="contato"> <!-- ID adicionado -->
+        <div class="container">
+            <h2>Vamos Conversar?</h2>
+            <p>
+                A vaga pedia Full Stack, IA e BI — eu entreguei os três.
+                <br>Estou à disposição para discutir como posso contribuir com o time da Elo Brindes.
+            </p>
+            
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/leanttro/" class="contact-btn" target="_blank">LinkedIn</a>
+                <a href="https://github.com/leanttro" class="contact-btn" target="_blank">GitHub</a>
+                <a href="http://wa.me/+5511913324827" class="contact-btn" target="_blank">WhatsApp</a>
+                <a href="mailto:leandroandrade020797@gmail.com" class="contact-btn">E-mail</a>
+                <!-- Botão Portfólio Adicionado -->
+                <a href="https://leanttro.onrender.com/" class="contact-btn" target="_blank">Portfólio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Leandro Andrade | Desenvolvido como proposta de valor para Elo Brindes</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT PARA O SLIDESHOW -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- NOVO: LÓGICA DO CABEÇALHO ---
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+
+            const menuToggle = document.getElementById('menu-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            menuToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            // Fecha o menu ao clicar em um link
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+            // --- FIM: LÓGICA DO CABEÇALHO ---
+
+
+            // --- Lógica Slideshow Hero ---
+            const slideshow = document.getElementById('hero-slideshow');
+            if (slideshow) {
+                const slides = slideshow.querySelectorAll('.hero-slide');
+                let currentSlide = 0;
+
+                setInterval(() => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                }, 5000); // Troca de slide a cada 5 segundos
+            }
+
+            // --- LÓGICA DO CARROSSEL "SOBRE MIM" ---
+            const aboutCarousel = document.getElementById('about-carousel');
+            if (aboutCarousel) {
+                const slider = aboutCarousel.querySelector('.carousel-slider');
+                const slides = aboutCarousel.querySelectorAll('.carousel-slide');
+                const prevBtn = document.getElementById('about-prev');
+                const nextBtn = document.getElementById('about-next');
+                
+                let currentIndex = 0;
+                const totalSlides = slides.length;
+
+                function updateCarousel() {
+                    const slideWidth = slides[0].offsetWidth; // Pega a largura do slide
+                    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                }
+
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex + 1) % totalSlides;
+                    updateCarousel();
+                });
+
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+                    updateCarousel();
+                });
+
+                // Atualiza o carrossel se a janela for redimensionada
+                window.addEventListener('resize', updateCarousel);
+                
+                // Ajuste inicial (caso as fontes ou imagens demorem a carregar)
+                setTimeout(updateCarousel, 100); 
+            }
+            // --- FIM DO SCRIPT DO CARROSSEL "SOBRE MIM" ---
+
+            
+            // --- INÍCIO: NOVA LÓGICA CARROSSEL "OUTROS PROJETOS" ---
+            const projectsData = [
+                {
+                    id: 1,
+                    title: "Feiras de Rua - SP",
+                    skills: ["Desenvolvimento Web", "Python", "SQL"],
+                    liveLink: "https://www.feirasderua.com.br",
+                    imageSrc: "projeto-1.png"
+                },
+                {
+                    id: 2,
+                    title: "Pipeline de Dados - NYC Taxi",
+                    skills: ["GCP", "Python", "SQL", "Databricks"],
+                    liveLink: "https://leanttro.github.io/taxi_nyc_cloud",
+                    imageSrc: "projeto-2.png"
+                },
+                {
+                    id: 3,
+                    title: "Automação de Leads de Marketing",
+                    skills: ["Automação", "Python", "SQL", "API Rest"],
+                    liveLink: "https://automacao-mkt-api.onrender.com/",
+                    imageSrc: "projeto-3.png"
+                },
+                {
+                    id: 4,
+                    title: "Dashboard de Risco de Crédito",
+                    skills: ["Power BI", "Python", "Machine Learning"],
+                    liveLink: "https://github.com/leanttro/credit_risk_analysis", // Link para o repo, já que não há link "ao vivo"
+                    imageSrc: "projeto-4.png"
+                },
+                {
+                    id: 5,
+                    title: "Pipeline de E-commerce",
+                    skills: ["Python", "SQL", "API Rest", "Docker"],
+                    liveLink: "https://github.com/leanttro/kaggle_ecommerce_pipeline.git",
+                    imageSrc: "projeto-5.png"
+                },
+                {
+                    id: 6,
+                    title: "Website Institucional",
+                    skills: ["Desenvolvimento Web"],
+                    liveLink: "https://leanttro.github.io/vick_express/",
+                    imageSrc: "projeto-6.png"
+                }
+            ];
+
+            const carouselContainer = document.getElementById('outros-projetos-carousel');
+            if (carouselContainer) {
+                // 1. Popula o carrossel
+                projectsData.forEach(project => {
+                    const card = document.createElement('div');
+                    card.className = 'outro-projeto-card';
+                    
+                    const skillsHTML = project.skills.map(skill => `<span>${skill}</span>`).join('');
+                    
+                    // Placeholder de imagem com 'onerror'
+                    const placeholder = `https://placehold.co/300x200/4d0307/FFFFFF?text=${project.title.replace(' ', '+')}`;
+                    
+                    card.innerHTML = `
+                        <img src="${project.imageSrc}" 
+                             alt="Imagem do projeto ${project.title}" 
+                             class="outro-projeto-imagem"
+                             onerror="this.onerror=null;this.src='${placeholder}';">
+                        <div class="outro-projeto-conteudo">
+                            <h3>${project.title}</h3>
+                            <div class="outro-projeto-skills">
+                                ${skillsHTML}
+                            </div>
+                            <div class="outro-projeto-links">
+                                <a href="${project.liveLink}" class="btn-primary" target="_blank">Ver Projeto</a>
+                            </div>
+                        </div>
+                    `;
+                    carouselContainer.appendChild(card);
+                });
+
+                // 2. Lógica dos botões de navegação
+                const prevBtn = document.getElementById('prev-projeto-btn');
+                const nextBtn = document.getElementById('next-projeto-btn');
+                
+                const scrollAmount = 324; // Largura do card (300) + gap (24)
+
+                prevBtn.addEventListener('click', () => {
+                    carouselContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    carouselContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                });
+            }
+            // --- FIM: NOVA LÓGICA CARROSSEL "OUTROS PROJETOS" ---
+        });
+    </script>
+
+</body>
+</html>
+
